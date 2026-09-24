@@ -200,7 +200,7 @@ function ProductsPage() {
         <div className="mb-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <h1 className="text-xl font-semibold text-slate-900">Products</h1>
-            <p className="text-sm text-slate-500">Search, filter, sort and manage your catalog.</p>
+            {/* <p className="text-sm text-slate-500">Search, filter, sort and manage your catalog.</p> */}
           </div>
           <Link
             to="/products/new"

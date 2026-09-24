@@ -20,7 +20,7 @@ export default function Pagination({
   return (
     <div className="flex flex-col items-center justify-between gap-3 border-t border-slate-200 bg-white px-4 py-3 sm:flex-row sm:px-6">
       <p className="text-sm text-slate-600">
-        Showing <strong className="font-medium text-slate-900">{rangeStart}–{rangeEnd}</strong> of{" "}
+        Page <strong className="font-medium text-slate-900">{rangeStart}–{rangeEnd}</strong> of{" "}
         <strong className="font-medium text-slate-900">{total}</strong>
       </p>
 
