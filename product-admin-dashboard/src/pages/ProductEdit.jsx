@@ -11,7 +11,6 @@ import { addUpdatedProduct, findLocalProduct, isDeleted } from "@/lib/localOverr
 function EditProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [status, setStatus] = useState("idle");
   const [product, setProduct] = useState(null);
   const [categories, setCategories] = useState([]);

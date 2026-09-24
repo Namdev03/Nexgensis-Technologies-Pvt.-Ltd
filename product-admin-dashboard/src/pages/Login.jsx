@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
+import { login } from "../lib/authApi";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -32,9 +33,11 @@ export default function LoginPage() {
       setError("Please enter both username and password.");
       return;
     }
-
+   //calling the api
     const res = await login(username.trim(), password);
     if (!res.ok && res.message) setError(res.message);
+    // console.log(res);
+    
   }
 
   return (

@@ -1,51 +1,103 @@
 import api from "./axios";
 
-// All product-related network calls live here so components never call
-// axios directly. Every read function accepts an optional AbortController
-// signal so callers can cancel a stale request (needed for fast typing in search).
+// All product-related network calls live here.
+// Components should not call Axios directly.
+// Read functions accept an optional AbortController signal
+// so requests can be cancelled when needed.
 
-export function fetchProducts({ limit, skip, sortBy, order, signal }) {
-  const params = { limit, skip };
+export async function fetchProducts({
+  limit,
+  skip,
+  sortBy,
+  order,
+  signal,
+}) {
+  const params = {
+    limit,
+    skip,
+  };
+
   if (sortBy) {
     params.sortBy = sortBy;
     params.order = order || "asc";
   }
-  return api.get("/products", { params, signal }).then((res) => res.data);
+
+  const response = await api.get("/products", {
+    params,
+    signal,
+  });
+  return response.data;
 }
 
-export function fetchProductsByCategory({ category, limit, skip, sortBy, order, signal }) {
-  const params = { limit, skip };
+export async function fetchProductsByCategory({ category, limit, skip, sortBy, order, signal }) {
+  const params = {
+    limit,
+    skip,
+  };
   if (sortBy) {
     params.sortBy = sortBy;
     params.order = order || "asc";
   }
-  return api
-    .get(`/products/category/${encodeURIComponent(category)}`, { params, signal })
-    .then((res) => res.data);
+
+  const response = await api.get(
+    `/products/category/${encodeURIComponent(category)}`,
+    {
+      params,
+      signal,
+    }
+  );
+
+  return response.data;
 }
 
-export function searchProducts({ q, limit, skip, signal }) {
-  return api
-    .get("/products/search", { params: { q, limit, skip }, signal })
-    .then((res) => res.data);
+export async function searchProducts({
+  q,
+  limit,
+  skip,
+  signal,
+}) {
+  const response = await api.get("/products/search", {
+    params: {
+      q,
+      limit,
+      skip,
+    },
+    signal,
+  });
+
+  return response.data;
 }
 
-export function fetchCategories(signal) {
-  return api.get("/products/categories", { signal }).then((res) => res.data);
+export async function fetchCategories(signal) {
+  const response = await api.get("/products/categories", {
+    signal,
+  });
+
+  return response.data;
 }
 
-export function fetchProductById(id, signal) {
-  return api.get(`/products/${id}`, { signal }).then((res) => res.data);
+export async function fetchProductById(id, signal) {
+  const response = await api.get(`/products/${id}`, {
+    signal,
+  });
+
+  return response.data;
 }
 
-export function createProduct(payload) {
-  return api.post("/products/add", payload).then((res) => res.data);
+export async function createProduct(payload) {
+  const response = await api.post("/products/add", payload);
+
+  return response.data;
 }
 
-export function updateProduct(id, payload) {
-  return api.put(`/products/${id}`, payload).then((res) => res.data);
+export async function updateProduct(id, payload) {
+  const response = await api.put(`/products/${id}`, payload);
+
+  return response.data;
 }
 
-export function deleteProduct(id) {
-  return api.delete(`/products/${id}`).then((res) => res.data);
+export async function deleteProduct(id) {
+  const response = await api.delete(`/products/${id}`);
+
+  return response.data;
 }
